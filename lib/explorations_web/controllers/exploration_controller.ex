@@ -4,6 +4,8 @@ defmodule ExplorationsWeb.ExplorationController do
   alias Explorations.Exploration
   alias Explorations.Explorations
 
+  require Logger
+
   def index(conn, _params) do
     explorations = Explorations.list_explorations()
     render(conn, :index, explorations: explorations)
@@ -27,22 +29,28 @@ defmodule ExplorationsWeb.ExplorationController do
   def create(conn, %{"exploration" => %{"city" => city}} = _params) do
     chosen_city =
       case city do
-        "" -> Enum.random(["New York", "Paris", "Tokyo", "London", "Sydney"])
+        "" -> "random"
         _ -> city
       end
 
-    IO.puts("TODO: creating exploration for #{chosen_city}.")
-    text = "This is a placeholder text for #{chosen_city}."
-    exploration_params = %{city: chosen_city, text: text}
+    Logger.info("Creating exploration for #{chosen_city}.")
 
-    case Explorations.create_exploration(exploration_params) do
+    case Explorations.create_exploration(chosen_city) do
       {:ok, exploration} ->
         conn
         |> put_flash(:info, "Exploration created successfully.")
         |> redirect(to: ~p"/explorations/#{exploration}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        Logger.error("Got a changeset back in create(): #{inspect(changeset)}")
         render(conn, :new, changeset: changeset)
+
+      {:error, reason} ->
+        Logger.error("Failed to create exploration: #{inspect(reason)}")
+
+        conn
+        |> put_flash(:error, "Failed to create exploration.")
+        |> redirect(to: ~p"/random")
     end
   end
 
