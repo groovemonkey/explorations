@@ -1,0 +1,14 @@
+<.header>
+  Exploration <%= @exploration.id %>
+  <:subtitle>This is an exploration record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/explorations/all"}>
+      <.button>Back to explorations</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="City"><%= @exploration.city %></:item>
+  <:item title="Text"><%= @exploration.text %></:item>
+</.list>

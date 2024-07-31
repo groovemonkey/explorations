@@ -1,0 +1,40 @@
+<header class="bg-blue-600 text-white shadow-lg">
+  <nav class="container mx-auto px-6 py-3">
+    <div class="flex items-center justify-between">
+      <div class="text-xl font-semibold">
+        <a href="/" class="hover:text-blue-200">Exploration App</a>
+      </div>
+      <div class="flex space-x-4">
+        <.link
+          navigate={~p"/"}
+          class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300"
+        >
+          Home
+        </.link>
+        <.link
+          navigate={~p"/explorations/all"}
+          class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300"
+        >
+          All Explorations
+        </.link>
+        <.link
+          navigate={~p"/random"}
+          class="hover:bg-blue-700 px-3 py-2 rounded transition duration-300"
+        >
+          Random Exploration
+        </.link>
+        <.link
+          navigate={~p"/new"}
+          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+        >
+          Create New Exploration
+        </.link>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container mx-auto mt-8 px-4">
+  <.flash_group flash={@flash} />
+  <%= @inner_content %>
+</main>

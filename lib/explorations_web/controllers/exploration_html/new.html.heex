@@ -1,0 +1,23 @@
+<.header>
+  New Exploration
+  <:subtitle>Use this form to create a new exploration.</:subtitle>
+</.header>
+
+<.simple_form :let={f} for={@changeset} action={~p"/new"}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+
+  <.input
+    field={f[:city]}
+    type="text"
+    label="City"
+    placeholder="Leave this blank to have the LLM pick a random city for you."
+  />
+
+  <:actions>
+    <.button>Save Exploration</.button>
+  </:actions>
+</.simple_form>
+
+<.back navigate={~p"/explorations/all"}>Back to explorations</.back>

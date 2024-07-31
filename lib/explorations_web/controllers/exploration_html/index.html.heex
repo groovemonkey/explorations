@@ -1,0 +1,16 @@
+<.header>
+  Listing Explorations
+  <:actions>
+    <.link href={~p"/new"}>
+      <.button>New Exploration</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="explorations" rows={@explorations}>
+  <:col :let={exploration} label="City"><%= exploration.city %></:col>
+  <:col :let={exploration} label="Text"><%= exploration.text %></:col>
+  <:action :let={exploration}>
+    <.link navigate={~p"/explorations/#{exploration}"}>Show</.link>
+  </:action>
+</.table>
