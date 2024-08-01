@@ -8,7 +8,19 @@ defmodule ExplorationsWeb.ExplorationController do
 
   def index(conn, _params) do
     explorations = Explorations.list_explorations()
-    render(conn, :index, explorations: explorations)
+
+    trimmed =
+      Enum.map(explorations, fn exploration ->
+        parsed_text = Jason.decode!(exploration.text)
+
+        Map.put(
+          exploration,
+          :text,
+          "#{parsed_text["name"]} - #{length(parsed_text["locations"])} locations"
+        )
+      end)
+
+    render(conn, :index, explorations: trimmed)
   end
 
   def show(conn, %{"id" => id}) do

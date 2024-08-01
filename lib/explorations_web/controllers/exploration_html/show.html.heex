@@ -1,6 +1,8 @@
 <.header>
   Exploration <%= @exploration.id %>
-  <:subtitle>This is an exploration record from your database.</:subtitle>
+  <:subtitle>
+    Here's an exploration that you can follow along with in Google Streetview or Google Earth VR
+  </:subtitle>
   <:actions>
     <.link href={~p"/explorations/all"}>
       <.button>Back to explorations</.button>
@@ -10,5 +12,23 @@
 
 <.list>
   <:item title="City"><%= @exploration.city %></:item>
-  <:item title="Text"><%= @exploration.text %></:item>
+  <:item title="Character"><%= @exploration.text["name"] %></:item>
+  <:item title="Background"><%= @exploration.text["background"] %></:item>
 </.list>
+
+<hr class="mt-4 mb-4" />
+<h2 class="text-xl">Locations to check out:</h2>
+<ol class="list-decimal pl-5 mt-4">
+  <%= for loc <- @exploration.text["locations"] do %>
+    <li class="mb-4">
+      <p>
+        <span class="text-gray-900 font-semibold">Address:</span>
+        <span class="text-gray-700"><%= loc["address"] %></span>
+      </p>
+      <p>
+        <span class="text-gray-900 font-semibold">Description:</span>
+        <span class="text-gray-700"><%= loc["description"] %></span>
+      </p>
+    </li>
+  <% end %>
+</ol>

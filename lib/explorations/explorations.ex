@@ -40,11 +40,22 @@ defmodule Explorations.Explorations do
     If a city name is given, and keywords are also passed, just ignore those key words.
   """
 
+  @doc """
+  This function returns the exploration with its text field formatted as a map
+  """
+  def format_exploration_text(exploration) do
+    Map.put(
+      exploration,
+      :text,
+      Jason.decode!(exploration.text)
+    )
+  end
+
   def list_explorations do
     Repo.all(Exploration)
   end
 
-  def get_exploration!(id), do: Repo.get!(Exploration, id)
+  def get_exploration!(id), do: format_exploration_text(Repo.get!(Exploration, id))
 
   def create_exploration(city, key_words) do
     prompt_with_key_words = @prompt <> " " <> "Keywords: #{key_words}"
@@ -73,6 +84,7 @@ defmodule Explorations.Explorations do
     |> order_by(fragment("RANDOM()"))
     |> limit(1)
     |> Repo.one()
+    |> format_exploration_text()
   end
 
   def get_random_exploration(city) do
@@ -81,5 +93,6 @@ defmodule Explorations.Explorations do
     |> order_by(fragment("RANDOM()"))
     |> limit(1)
     |> Repo.one()
+    |> format_exploration_text()
   end
 end
