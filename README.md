@@ -2,8 +2,7 @@
 
 ## TODO
 
-- separate the Exploration schema/model into all of its constituent JSON fields.
-- mark random cities with the correct city name when saving them
+- make a "please wait" page while the exploration is being generated...something to show the user that something is happening.
 
 ## About
 

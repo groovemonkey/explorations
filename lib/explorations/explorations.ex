@@ -36,6 +36,8 @@ defmodule Explorations.Explorations do
 
        
     Please wait until my next prompt, which will either give you the name of a city to use as a starting point, or give you the string "random" which means you should pick a random place for the location.
+    If "random" is selected, I may also give you a list of key words that the city you choose should match in some way. For example, "beach, sun, fun" might mean you should pick a city with a beach and a sunny climate.
+    If a city name is given, and keywords are also passed, just ignore those key words.
   """
 
   def list_explorations do
@@ -44,13 +46,17 @@ defmodule Explorations.Explorations do
 
   def get_exploration!(id), do: Repo.get!(Exploration, id)
 
-  def create_exploration(city) do
-    case Explorations.LLM.Chatgpt.gpt_request(@prompt, city) do
+  def create_exploration(city, key_words) do
+    prompt_with_key_words = @prompt <> " " <> "Keywords: #{key_words}"
+
+    case Explorations.LLM.Chatgpt.gpt_request(prompt_with_key_words, city) do
+      # response is a map (has been parsed by Jason library)
       {:ok, response} ->
+        response_city = response["city"]
         string_for_now = Jason.encode!(response)
 
         %Exploration{}
-        |> Exploration.changeset(%{city: city, text: string_for_now})
+        |> Exploration.changeset(%{city: response_city, text: string_for_now})
         |> Repo.insert()
 
       {:error, reason} ->

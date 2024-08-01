@@ -15,6 +15,16 @@
     placeholder="Leave this blank to have the LLM pick a random city for you."
   />
 
+  <p>
+    (optional) If you're choosing a random 'city' by leaving the City field blank, you can optionally enter a few key words here to hint at the kind of place you want to choose.
+  </p>
+  <.input
+    field={f[:key_words]}
+    type="text"
+    label="Key Words"
+    placeholder="e.g. 'sunny', 'alps', 'french countryside', 'beaches' etc."
+  />
+
   <:actions>
     <.button>Save Exploration</.button>
   </:actions>

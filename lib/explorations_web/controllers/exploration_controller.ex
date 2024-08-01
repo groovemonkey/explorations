@@ -26,7 +26,7 @@ defmodule ExplorationsWeb.ExplorationController do
     render(conn, :show, exploration: exploration)
   end
 
-  def create(conn, %{"exploration" => %{"city" => city}} = _params) do
+  def create(conn, %{"exploration" => %{"city" => city, "key_words" => key_words}} = _params) do
     chosen_city =
       case city do
         "" -> "random"
@@ -35,7 +35,7 @@ defmodule ExplorationsWeb.ExplorationController do
 
     Logger.info("Creating exploration for #{chosen_city}.")
 
-    case Explorations.create_exploration(chosen_city) do
+    case Explorations.create_exploration(chosen_city, key_words) do
       {:ok, exploration} ->
         conn
         |> put_flash(:info, "Exploration created successfully.")
