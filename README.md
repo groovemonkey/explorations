@@ -27,13 +27,26 @@ You'll get something like this:
 
 ## Try it out
 
-To start your Phoenix server:
+This is an Elixir application, so install elixir first. Probably something like this (on macos):
+
+```bash
+brew install elixir
+```
+
+### Run a postgres container
+
+This application requires postgres, so just run a container:
+
+```bash
+docker run --rm --name pg_explorations -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres
+```
+
+### Start the webserver
+
+Then `cd` to this project directory and start your Phoenix server:
 
 - Run `mix setup` to install and setup dependencies
-- Run a postgres server, e.g. in a Docker container
-- mix ecto.reset
-- Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+- Create the database and run all migrations (this would drop and reset existing database): `mix ecto.reset`
+- Start the Phoenix endpoint inside IEx with `iex -S mix phx.server` (this is dope because you get a REPL/shell to experiment with, INSIDE THE RUNNING APPLICATION)
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
