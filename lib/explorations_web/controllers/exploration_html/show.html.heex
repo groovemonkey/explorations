@@ -23,7 +23,13 @@
     <li class="mb-4">
       <p>
         <span class="text-gray-900 font-semibold">Address:</span>
-        <span class="text-gray-700"><%= loc["address"] %></span>
+        <a
+          target="_blank"
+          class="text-blue-500"
+          href={"https://www.google.com/maps/search/?api=1&query=#{String.replace(loc["address"], " ", "+")}&layer=c"}
+        >
+          <%= loc["address"] %>
+        </a>
       </p>
       <p>
         <span class="text-gray-900 font-semibold">Description:</span>

@@ -12,7 +12,7 @@ defmodule Explorations.Explorations do
     3. Their socioeconomic class.
     4. A home where they might live (address).
     5. Where they work.
-    6. Where they do recreational stuff — the park near their house, their favorite bar or restaurant, other things like that. all should be plausible and near enough to their home/work that it feels realistic.
+    6. Where they do recreational stuff — the park near their house, their favorite bar or restaurant, other things like that. all should be plausible and near enough to their home/work that it feels realistic. These places must be REAL locations/businesses/points of interest that exist and are findable on google maps.
 
     Put all of this into a format that’s easy to follow on google maps/google earth VR so people can explore this made-up person’s plausible “reality” as a kind of exploration/empathy game.
 
